@@ -1,9 +1,11 @@
 (function() {
   'use strict';
 
-  var Hello = require('./components/Hello');
+  var React = require('react');
+  var Hello = require('./components/Hello.jsx');
 
-  var hello = new Hello();
-
-  console.log(hello.message);
+  // React.render(<Hello name='React' />, document.getElementById('react-app'));
+  React.render(
+    React.createFactory(Hello)({name: 'React'}), document.getElementById('react-app')
+  );
 })();

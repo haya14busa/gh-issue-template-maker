@@ -14,9 +14,10 @@
     "run-sequence": "^1.0.2"
   },
   "devDependencies": {
+    "gulp-filter": "^2.0.2",
     "gulp-webpack": "^1.2.0",
     "jsx-loader": "^0.12.2",
-    "react": "^0.12.2"
+    "main-bower-files": "^2.5.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

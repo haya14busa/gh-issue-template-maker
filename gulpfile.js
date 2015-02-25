@@ -8,6 +8,8 @@ var browserSync = require('browser-sync');
 var runSequence = require('run-sequence');
 var minifyHtml = require('gulp-minify-html');
 var webpack = require('gulp-webpack');
+var gulpFilter = require('gulp-filter');
+var mainBowerFiles = require('main-bower-files');
 
 // variables ---
 
@@ -19,6 +21,10 @@ source.html = source.root + '/**/*.html';
 
 var target = {}; // compiled files
 target.root = './_target';
+target.lib = {
+  js: target.root + '/lib/js/',
+  css: target.root + '/lib/css/'
+}
 target.js = target.root + '/js/';
 target.css = target.root + '/css/';
 
@@ -32,6 +38,9 @@ var config = {
       loaders: [
         { test: /\.jsx$/, loader: 'jsx-loader?harmony' }
       ]
+    },
+    externals: {
+      'react': 'React'
     },
     resolve: {
       extensions: ['', '.js'],
@@ -51,7 +60,7 @@ gulp.task('clean', function(cb) {
 });
 
 gulp.task('build', function() {
-  return gulp.start('sass', 'js', 'html');
+  return gulp.start('bower', 'sass', 'js', 'html');
 });
 
 gulp.task('watch', function() {
@@ -74,6 +83,18 @@ gulp.task('browser-sync', function() {
 });
 
 // specific tasks ---
+
+gulp.task('bower', function() {
+  var jsFilter = gulpFilter('**/*.js');
+  var cssFilter = gulpFilter('**/*.css');
+  return gulp
+    .src(mainBowerFiles())
+    .pipe(jsFilter)
+    .pipe(gulp.dest(target.lib.js))
+    .pipe(jsFilter.restore())
+    .pipe(cssFilter)
+    .pipe(gulp.dest(target.lib.css));
+});
 
 gulp.task('sass', function() {
   return gulp
