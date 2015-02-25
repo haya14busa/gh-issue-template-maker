@@ -29,7 +29,8 @@ var config = {
       filename: 'bundle.js'
     },
     resolve: {
-      extensions: ['', '.js']
+      extensions: ['', '.js'],
+      // root: [source.root + '/js/components']
     }
   }
 };
