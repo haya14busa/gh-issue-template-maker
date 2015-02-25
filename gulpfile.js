@@ -11,8 +11,8 @@ var minifyHtml = require('gulp-minify-html');
 // variables ---
 
 var source = {}; // files to watch
-source.js = 'assets/js/**/*.js';
-source.sass = 'assets/sass/**/*scss';
+source.js = 'app/js/**/*.js';
+source.sass = 'app/sass/**/*scss';
 source.html = 'app/**/*.html';
 
 var target = {}; // compiled files
