@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var uglify = require('gulp-uglify');
+var plumber = require('gulp-plumber');
 
 // variables ---
 
@@ -29,6 +30,7 @@ gulp.task('watch', function() {
 gulp.task('sass', function() {
   gulp
     .src(source.sass)
+    .pipe(plumber())
     .pipe(sass())
     .pipe(autoprefixer())
     .pipe(gulp.dest(target.css));
@@ -37,6 +39,7 @@ gulp.task('sass', function() {
 gulp.task('js', function() {
   gulp
     .src(source.js)
+    .pipe(plumber())
     .pipe(uglify())
     .pipe(gulp.dest(target.js));
 });
