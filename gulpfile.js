@@ -6,8 +6,13 @@ var uglify = require('gulp-uglify');
 // variables ---
 
 var source = {}; // files to watch
-source.js = ['assets/js/**/*.js', '!assets/js/min/**/*.js'];
+source.js = 'assets/js/**/*.js';
 source.sass = 'assets/sass/**/*scss';
+
+var target = {}; // compiled files
+target.root = '_target/';
+target.js = target.root + 'js/';
+target.css = target.root + 'css/';
 
 // tasks ---
 
@@ -26,12 +31,12 @@ gulp.task('sass', function() {
     .src(source.sass)
     .pipe(sass())
     .pipe(autoprefixer())
-    .pipe(gulp.dest('assets/css'));
+    .pipe(gulp.dest(target.css));
 });
 
 gulp.task('js', function() {
   gulp
     .src(source.js)
     .pipe(uglify())
-    .pipe(gulp.dest('assets/js/min'));
+    .pipe(gulp.dest(target.js));
 });
