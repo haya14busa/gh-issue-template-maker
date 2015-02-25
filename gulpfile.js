@@ -16,7 +16,7 @@ var mainBowerFiles = require('main-bower-files');
 
 var source = {}; // files to watch
 source.root = './app';
-source.js = source.root + '/js/**/*.js';
+source.js = source.root + '/js/**/*.js{,x}';
 source.sass = source.root + '/sass/**/*scss';
 source.html = source.root + '/**/*.html';
 
