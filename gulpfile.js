@@ -7,18 +7,32 @@ var del = require('del');
 var browserSync = require('browser-sync');
 var runSequence = require('run-sequence');
 var minifyHtml = require('gulp-minify-html');
+var webpack = require('gulp-webpack');
 
 // variables ---
 
 var source = {}; // files to watch
-source.js = 'app/js/**/*.js';
-source.sass = 'app/sass/**/*scss';
-source.html = 'app/**/*.html';
+source.root = './app';
+source.js = source.root + '/js/**/*.js';
+source.sass = source.root + '/sass/**/*scss';
+source.html = source.root + '/**/*.html';
 
 var target = {}; // compiled files
-target.root = '_target/';
-target.js = target.root + 'js/';
-target.css = target.root + 'css/';
+target.root = './_target';
+target.js = target.root + '/js/';
+target.css = target.root + '/css/';
+
+var config = {
+  webpack: {
+    entry: source.root + '/js/app.js',
+    output: {
+      filename: 'bundle.js'
+    },
+    resolve: {
+      extensions: ['', '.js']
+    }
+  }
+};
 
 // tasks ---
 
@@ -46,8 +60,7 @@ gulp.task('browser-sync', function() {
   if (!browserSync.active) {
     browserSync({
       server: {
-        // baseDir: target.root
-        baseDir: './' + target.root
+        baseDir: target.root
       },
       host: 'localhost'
     });
@@ -66,15 +79,12 @@ gulp.task('sass', function() {
 });
 
 gulp.task('js', function() {
-  // XXX: workaround
-  // Error: EEXIST, mkdir
-  return del(target.js, function() {
-    return gulp
-      .src(source.js)
-      .pipe(plumber())
-      .pipe(uglify())
-      .pipe(gulp.dest(target.js));
-  });
+  gulp
+    .src(config.webpack.entry)
+    .pipe(plumber())
+    .pipe(webpack(config.webpack))
+    .pipe(uglify())
+    .pipe(gulp.dest(target.js));
 });
 
 gulp.task('html', function() {
