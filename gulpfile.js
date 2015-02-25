@@ -3,6 +3,7 @@ var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var uglify = require('gulp-uglify');
 var plumber = require('gulp-plumber');
+var del = require('del');
 
 // variables ---
 
@@ -20,6 +21,10 @@ target.css = target.root + 'css/';
 gulp.task('default', function() {
   // place code for your default task here
   console.log('Hello gulp!');
+});
+
+gulp.task('clean', function(cb) {
+  del([target.root + '/*'], cb);
 });
 
 gulp.task('watch', function() {
