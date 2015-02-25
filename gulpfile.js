@@ -6,12 +6,14 @@ var plumber = require('gulp-plumber');
 var del = require('del');
 var browserSync = require('browser-sync');
 var runSequence = require('run-sequence');
+var minifyHtml = require('gulp-minify-html');
 
 // variables ---
 
 var source = {}; // files to watch
 source.js = 'assets/js/**/*.js';
 source.sass = 'assets/sass/**/*scss';
+source.html = 'app/**/*.html';
 
 var target = {}; // compiled files
 target.root = '_target/';
@@ -29,13 +31,13 @@ gulp.task('clean', function(cb) {
 });
 
 gulp.task('build', function() {
-  return gulp.start('sass', 'js');
+  return gulp.start('sass', 'js', 'html');
 });
 
 gulp.task('watch', function() {
   gulp.watch(source.js, ['js', browserSync.reload]);
   gulp.watch(source.sass, ['sass', browserSync.reload]);
-  gulp.watch('./index.html', [browserSync.reload]);
+  gulp.watch(source.html, ['html', browserSync.reload]);
 });
 
 gulp.task('browser-sync', function() {
@@ -44,7 +46,8 @@ gulp.task('browser-sync', function() {
   if (!browserSync.active) {
     browserSync({
       server: {
-        baseDir: './'
+        // baseDir: target.root
+        baseDir: './' + target.root
       },
       host: 'localhost'
     });
@@ -72,4 +75,12 @@ gulp.task('js', function() {
       .pipe(uglify())
       .pipe(gulp.dest(target.js));
   });
+});
+
+gulp.task('html', function() {
+  return gulp
+    .src(source.html)
+    .pipe(plumber())
+    .pipe(minifyHtml())
+    .pipe(gulp.dest(target.root));
 });
