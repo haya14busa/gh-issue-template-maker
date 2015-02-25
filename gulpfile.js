@@ -28,6 +28,11 @@ var config = {
     output: {
       filename: 'bundle.js'
     },
+    module: {
+      loaders: [
+        { test: /\.jsx$/, loader: 'jsx-loader?harmony' }
+      ]
+    },
     resolve: {
       extensions: ['', '.js'],
       // root: [source.root + '/js/components']
