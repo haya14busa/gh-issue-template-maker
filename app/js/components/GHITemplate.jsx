@@ -12,6 +12,11 @@ marked.setOptions({
   smartLists: true,
   smartypants: false
 });
+var emojify = require('emojify.js')
+emojify.setConfig({
+  img_dir: 'lib/assets/emojify.js/dist/images/basic',
+  ignore_emoticons: true
+});
 
 var LinkedStateMixin = React.addons.LinkedStateMixin
 var PureRenderMixin = React.addons.PureRenderMixin;
@@ -90,9 +95,12 @@ var Preview = React.createClass({
     title: React.PropTypes.string.isRequired,
     body: React.PropTypes.string.isRequired
   },
+  componentDidUpdate: function() {
+    emojify.run(this.refs.previewArea.getDOMNode());
+  },
   render() {
     return (
-      <div>
+      <div ref='previewArea'>
         <h2>Preview</h2>
         <h3>{this.props.title}</h3>
         <div

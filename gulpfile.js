@@ -8,7 +8,8 @@ var del = require('del');
 var browserSync = require('browser-sync');
 var runSequence = require('run-sequence');
 var minifyHtml = require('gulp-minify-html');
-var webpack = require('gulp-webpack');
+var webpack = require('webpack');
+var gulpwebpack = require('gulp-webpack');
 var gulpFilter = require('gulp-filter');
 var mainBowerFiles = require('main-bower-files');
 
@@ -24,7 +25,8 @@ var target = {}; // compiled files
 target.root = './_target';
 target.lib = {
   js: target.root + '/lib/js/',
-  css: target.root + '/lib/css/'
+  css: target.root + '/lib/css/',
+  assets: target.root + '/lib/assets/'
 }
 target.js = target.root + '/js/';
 target.css = target.root + '/css/';
@@ -47,8 +49,13 @@ var config = {
     },
     resolve: {
       extensions: ['', '.js'],
-      // root: [source.root + '/js/components']
-    }
+      root: [source.root + '/js/components', './bower_components/']
+    },
+    plugins: [
+      new webpack.ResolverPlugin(
+        new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('bower.json', ['main'])
+      )
+    ]
   }
 };
 
@@ -90,6 +97,7 @@ gulp.task('browser-sync', function() {
 gulp.task('bower', function() {
   var jsFilter = gulpFilter('**/*.js');
   var cssFilter = gulpFilter('**/*.css');
+  var imageFilter = gulpFilter('**/*.png');
   return gulp
     // NOTE: do not use mainBowerFiles() because I want to use react-with-addon
     // .src(mainBowerFiles())
@@ -98,7 +106,10 @@ gulp.task('bower', function() {
     .pipe(gulp.dest(target.lib.js))
     .pipe(jsFilter.restore())
     .pipe(cssFilter)
-    .pipe(gulp.dest(target.lib.css));
+    .pipe(gulp.dest(target.lib.css))
+    .pipe(cssFilter.restore())
+    .pipe(imageFilter)
+    .pipe(gulp.dest(target.lib.assets));
 });
 
 gulp.task('sass', function() {
@@ -114,7 +125,7 @@ gulp.task('js', function() {
   gulp
     .src(config.webpack.entry)
     .pipe(plumber())
-    .pipe(webpack(config.webpack))
+    .pipe(gulpwebpack(config.webpack))
     // .pipe(uglify())
     .pipe(gulp.dest(target.js));
 });
