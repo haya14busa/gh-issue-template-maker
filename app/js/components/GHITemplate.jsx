@@ -50,6 +50,13 @@ var Textarea = React.createClass({
   componentDidMount: function() {
     textcomplete(this.refs.body.getDOMNode());
   },
+  bodyOnKeyUp: function(event) {
+    // NOTE: This is for jquery-textcomplete
+    // update state after completion.
+    if (this.state.body !== event.target.value) {
+      this.setState({ body: event.target.value });
+    }
+  },
   render() {
     return (
       <div>
@@ -60,7 +67,13 @@ var Textarea = React.createClass({
           <div style={style.mb10}>
             <input type='text' valueLink={this.linkState('title')} placeholder='Title' style={style.input} />
           </div>
-          <textarea ref='body' style={style.textarea} valueLink={this.linkState('body')} placeholder='Leave a comments'></textarea>
+          <textarea
+            ref='body'
+            style={style.textarea}
+            valueLink={this.linkState('body')}
+            onKeyUp={this.bodyOnKeyUp}
+            placeholder='Leave a comments'
+          ></textarea>
         </div>
         <GenerateURL title={this.state.title} body={this.state.body} repo={this.state.repo} />
         <Preview title={this.state.title} body={this.state.body} />
