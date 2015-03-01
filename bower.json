@@ -1,4 +1,5 @@
 {
+  "name": "gh-issue-template-maker",
   "dependencies": {
     "react": "~0.12.2"
   }

@@ -89,7 +89,9 @@ gulp.task('bower', function() {
   var jsFilter = gulpFilter('**/*.js');
   var cssFilter = gulpFilter('**/*.css');
   return gulp
-    .src(mainBowerFiles())
+    // NOTE: do not use mainBowerFiles() because I want to use react-with-addon
+    // .src(mainBowerFiles())
+    .src('./bower_components/**/*')
     .pipe(jsFilter)
     .pipe(gulp.dest(target.lib.js))
     .pipe(jsFilter.restore())
