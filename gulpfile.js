@@ -45,11 +45,12 @@ var config = {
     externals: {
       'react': 'React',
       'react/addons': 'React',
-      'react-router': 'ReactRouter'
+      'react-router': 'ReactRouter',
+      'jQuery': '$'
     },
     resolve: {
       extensions: ['', '.js'],
-      root: [source.root + '/js/components', './bower_components/']
+      root: [source.root + '/js/', './bower_components/']
     },
     plugins: [
       new webpack.ResolverPlugin(

@@ -1,8 +1,2 @@
-h1 {
-  color: #ccc;
-  transition: 200ms ease-out transform;
-  &:hover {
-    color: blue;
-    transform: translate(10px,0);
-  }
-}
+@import 'lib/emojify';
+@import 'lib/textcomplete';

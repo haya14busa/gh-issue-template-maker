@@ -6,6 +6,7 @@
     "marked": "~0.3.3",
     "github-markdown-css": "~2.0.5",
     "normalize.css": "~3.0.2",
-    "emojify.js": "~1.0.1"
+    "emojify.js": "~1.0.1",
+    "jquery-textcomplete": "~0.3.8"
   }
 }

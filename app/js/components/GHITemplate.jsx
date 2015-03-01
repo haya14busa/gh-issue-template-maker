@@ -2,6 +2,8 @@
 // GitHub Issues Template
 var React = require('react/addons');
 var _ = require('lodash');
+var consts = require('utils/const'); // *
+var textcomplete = require('jquery/textcomplete'); // *
 var marked = require('marked');
 marked.setOptions({
   gfm: true,
@@ -12,9 +14,9 @@ marked.setOptions({
   smartLists: true,
   smartypants: false
 });
-var emojify = require('emojify.js')
+var emojify = require('emojify.js');
 emojify.setConfig({
-  img_dir: 'lib/assets/emojify.js/dist/images/basic',
+  img_dir: consts.path.emoji,
   ignore_emoticons: true
 });
 
@@ -45,6 +47,9 @@ var Textarea = React.createClass({
       repo: 'https://github.com/{owner}/{repo}',
     };
   },
+  componentDidMount: function() {
+    textcomplete(this.refs.body.getDOMNode());
+  },
   render() {
     return (
       <div>
@@ -55,7 +60,7 @@ var Textarea = React.createClass({
           <div style={style.mb10}>
             <input type='text' valueLink={this.linkState('title')} placeholder='Title' style={style.input} />
           </div>
-          <textarea style={style.textarea} valueLink={this.linkState('body')} placeholder='Leave a comments'></textarea>
+          <textarea ref='body' style={style.textarea} valueLink={this.linkState('body')} placeholder='Leave a comments'></textarea>
         </div>
         <GenerateURL title={this.state.title} body={this.state.body} repo={this.state.repo} />
         <Preview title={this.state.title} body={this.state.body} />
