@@ -1,9 +1,9 @@
 // GHITemplate
 // GitHub Issues Template
 var React = require('react/addons');
+var _ = require('lodash');
 var marked = require('marked');
 marked.setOptions({
-  renderer: new marked.Renderer(),
   gfm: true,
   tables: true,
   breaks: true,
@@ -17,10 +17,11 @@ var LinkedStateMixin = React.addons.LinkedStateMixin
 var PureRenderMixin = React.addons.PureRenderMixin;
 
 var style = {
-  titleContainer: {
+  mb10: {
     marginBottom: 10,
   },
-  titleBox: {
+  input: {
+    width: 400,
     padding: '6px 10px'
   },
   textarea: {
@@ -35,21 +36,52 @@ var Textarea = React.createClass({
   getInitialState() {
     return {
       title: '',
-      body: ''
+      body: '',
+      repo: 'https://github.com/{owner}/{repo}',
     };
   },
   render() {
     return (
       <div>
         <div> {/* input */}
-          <div style={style.titleContainer}>
-            <input type='text' valueLink={this.linkState('title')} placeholder='Title' style={style.titleBox} />
+          <div style={style.mb10}>
+            <input type='text' valueLink={this.linkState('repo')} placeholder='Url' style={style.input} />
+          </div>
+          <div style={style.mb10}>
+            <input type='text' valueLink={this.linkState('title')} placeholder='Title' style={style.input} />
           </div>
           <textarea style={style.textarea} valueLink={this.linkState('body')} placeholder='Leave a comments'></textarea>
         </div>
+        <GenerateURL title={this.state.title} body={this.state.body} repo={this.state.repo} />
         <Preview title={this.state.title} body={this.state.body} />
       </div>
-    )
+    );
+  }
+});
+
+var GenerateURL = React.createClass({
+  propTypes: {
+    title: React.PropTypes.string.isRequired,
+    body: React.PropTypes.string.isRequired,
+    repo: React.PropTypes.string.isRequired
+  },
+  // --
+  template: _.template('<%= repo %>/issues/new?title=<%= title %>&body=<%= body %>'),
+  url: function() {
+    return this.template({
+      repo: this.props.repo,
+      title: encodeURIComponent(this.props.title),
+      body: encodeURIComponent(this.props.body)
+    });
+  },
+  // --
+  render() {
+    return (
+      <div>
+        <h2>URL</h2>
+        <pre>{this.url()}</pre>
+      </div>
+    );
   }
 });
 
@@ -70,7 +102,7 @@ var Preview = React.createClass({
           }}
         />
       </div>
-    )
+    );
   }
 });
 
