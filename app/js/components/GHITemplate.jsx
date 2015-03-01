@@ -50,9 +50,10 @@ var Textarea = React.createClass({
   componentDidMount: function() {
     textcomplete(this.refs.body.getDOMNode());
   },
-  bodyOnKeyUp: function(event) {
+  handleChange: function(event) {
     // NOTE: This is for jquery-textcomplete
     // update state after completion.
+    // FIXME: currently it doesn't support selecting with mouse click
     if (this.state.body !== event.target.value) {
       this.setState({ body: event.target.value });
     }
@@ -71,7 +72,7 @@ var Textarea = React.createClass({
             ref='body'
             style={style.textarea}
             valueLink={this.linkState('body')}
-            onKeyUp={this.bodyOnKeyUp}
+            onKeyUp={this.handleChange}
             placeholder='Leave a comments'
           ></textarea>
         </div>
@@ -118,11 +119,12 @@ var Preview = React.createClass({
   },
   render() {
     return (
-      <div ref='previewArea'>
+      <div>
         <h2>Preview</h2>
         <h3>{this.props.title}</h3>
         <div
           className='markdown-body' // github-markdown.css
+          ref='previewArea'
           dangerouslySetInnerHTML={{
             __html: marked(this.props.body)
           }}
