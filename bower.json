@@ -2,6 +2,9 @@
   "name": "gh-issue-template-maker",
   "dependencies": {
     "react": "~0.12.2",
-    "react-router": "~0.12.4"
+    "react-router": "~0.12.4",
+    "marked": "~0.3.3",
+    "github-markdown-css": "~2.0.5",
+    "normalize.css": "~3.0.2"
   }
 }

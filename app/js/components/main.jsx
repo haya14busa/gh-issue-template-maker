@@ -3,6 +3,7 @@ var Router = require('react-router');
 
 var Hello = require('./Hello.jsx');
 var TodoList = require('./TODO.jsx');
+var GHITemplate = require('./GHITemplate.jsx');
 
 var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
@@ -41,7 +42,7 @@ var routes = (
   <Route name='dashboard' path='/' handler={App}>
     <Route name='hello' handler={Hello}/>
     <Route name='todo' handler={TodoList}/>
-    <DefaultRoute handler={Dashboard}/>
+    <DefaultRoute handler={GHITemplate}/>
   </Route>
 );
 
