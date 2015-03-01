@@ -45,7 +45,6 @@ var config = {
     externals: {
       'react': 'React',
       'react/addons': 'React',
-      'react-router': 'ReactRouter',
       'jQuery': '$'
     },
     resolve: {
