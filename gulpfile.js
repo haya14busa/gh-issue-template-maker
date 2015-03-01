@@ -42,7 +42,8 @@ var config = {
     },
     externals: {
       'react': 'React',
-      'react/addons': 'React'
+      'react/addons': 'React',
+      'react-router': 'ReactRouter'
     },
     resolve: {
       extensions: ['', '.js'],
