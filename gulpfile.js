@@ -41,7 +41,8 @@ var config = {
       ]
     },
     externals: {
-      'react': 'React'
+      'react': 'React',
+      'react/addons': 'React'
     },
     resolve: {
       extensions: ['', '.js'],
@@ -113,7 +114,7 @@ gulp.task('js', function() {
     .src(config.webpack.entry)
     .pipe(plumber())
     .pipe(webpack(config.webpack))
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(gulp.dest(target.js));
 });
 

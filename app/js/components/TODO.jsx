@@ -1,5 +1,4 @@
-var React = require('react');
-// var React = require('react/addons');
+var React = require('react/addons');
 
 var Todo = React.createClass({
   propTypes: {
@@ -23,6 +22,7 @@ var Todo = React.createClass({
 });
 
 var TodoList = React.createClass({
+  mixins: [React.addons.LinkedStateMixin],
   getInitialState() {
     return {
       todos: [
@@ -56,11 +56,6 @@ var TodoList = React.createClass({
       text: ''
     });
   },
-  onChange(e) {
-    this.setState({
-      text: e.target.value
-    });
-  },
   render() {
     var todos = this.state.todos.map((todo) => {
       return (
@@ -73,7 +68,7 @@ var TodoList = React.createClass({
       <div>
         <ul>{todos}</ul>
         <form onSubmit={this.addTodo}>
-          <input type='text' onChange={this.onChange} value={this.state.text} />
+          <input type='text' valueLink={this.linkState('text')} />
           <button>Add</button>
         </form>
       </div>
