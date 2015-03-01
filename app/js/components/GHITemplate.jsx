@@ -47,13 +47,13 @@ var Textarea = React.createClass({
           </div>
           <textarea style={style.textarea} valueLink={this.linkState('body')} placeholder='Leave a comments'></textarea>
         </div>
-        <Output title={this.state.title} body={this.state.body} />
+        <Preview title={this.state.title} body={this.state.body} />
       </div>
     )
   }
 });
 
-var Output = React.createClass({
+var Preview = React.createClass({
   propTypes: {
     title: React.PropTypes.string.isRequired,
     body: React.PropTypes.string.isRequired
@@ -61,7 +61,7 @@ var Output = React.createClass({
   render() {
     return (
       <div>
-        <h2>Output</h2>
+        <h2>Preview</h2>
         <h3>{this.props.title}</h3>
         <div
           className='markdown-body' // github-markdown.css
