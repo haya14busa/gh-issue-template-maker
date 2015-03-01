@@ -1,6 +1,9 @@
 var React = require('react/addons');
+var LinkedStateMixin = React.addons.LinkedStateMixin
+var PureRenderMixin = React.addons.PureRenderMixin;
 
 var Todo = React.createClass({
+  mixins: [PureRenderMixin],
   propTypes: {
     todo: React.PropTypes.shape({
       id: React.PropTypes.number.isRequired,
@@ -22,7 +25,7 @@ var Todo = React.createClass({
 });
 
 var TodoList = React.createClass({
-  mixins: [React.addons.LinkedStateMixin],
+  mixins: [PureRenderMixin, LinkedStateMixin],
   getInitialState() {
     return {
       todos: [
