@@ -62,16 +62,14 @@ var config = {
 // tasks ---
 
 gulp.task('default', function() {
-  runSequence('clean', ['build', 'browser-sync', 'watch']);
+  runSequence('clean', 'build', ['browser-sync', 'watch']);
 });
 
 gulp.task('clean', function(cb) {
   return del([target.root + '/*'], cb);
 });
 
-gulp.task('build', function() {
-  return gulp.start('bower', 'sass', 'js', 'html');
-});
+gulp.task('build', ['bower', 'sass', 'js', 'html']);
 
 gulp.task('watch', function() {
   gulp.watch(source.js, ['js', browserSync.reload]);
@@ -122,7 +120,7 @@ gulp.task('sass', function() {
 });
 
 gulp.task('js', function() {
-  gulp
+  return gulp
     .src(config.webpack.entry)
     .pipe(plumber())
     .pipe(gulpwebpack(config.webpack))
