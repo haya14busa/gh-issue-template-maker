@@ -59,23 +59,26 @@ var GHTemplateMaker = React.createClass({
     }
   },
   render() {
+    var GHEditor = (
+      <div>
+        <div style={style.mb10}>
+          <input type='text' valueLink={this.linkState('repo')} placeholder='Url' style={style.input} />
+        </div>
+        <div style={style.mb10}>
+          <input type='text' valueLink={this.linkState('title')} placeholder='Title' style={style.input} />
+        </div>
+        <textarea
+          ref='body'
+          style={style.textarea}
+          valueLink={this.linkState('body')}
+          onKeyUp={this.handleChange}
+          placeholder='Leave a comments'
+        ></textarea>
+      </div>
+    );
     return (
       <div>
-        <div> {/* input */}
-          <div style={style.mb10}>
-            <input type='text' valueLink={this.linkState('repo')} placeholder='Url' style={style.input} />
-          </div>
-          <div style={style.mb10}>
-            <input type='text' valueLink={this.linkState('title')} placeholder='Title' style={style.input} />
-          </div>
-          <textarea
-            ref='body'
-            style={style.textarea}
-            valueLink={this.linkState('body')}
-            onKeyUp={this.handleChange}
-            placeholder='Leave a comments'
-          ></textarea>
-        </div>
+        {GHEditor}
         <GenerateURL title={this.state.title} body={this.state.body} repo={this.state.repo} />
         <Preview title={this.state.title} body={this.state.body} />
       </div>
