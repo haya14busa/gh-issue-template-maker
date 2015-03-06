@@ -73,7 +73,7 @@ gulp.task('build', ['bower', 'css', 'js', 'html']);
 
 gulp.task('watch', function() {
   gulp.watch(source.js, ['js', browserSync.reload]);
-  gulp.watch(source.less, ['less', browserSync.reload]);
+  gulp.watch(source.less, ['css', browserSync.reload]);
   gulp.watch(source.html, ['html', browserSync.reload]);
 });
 

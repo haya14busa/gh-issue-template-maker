@@ -2,6 +2,7 @@
 @import 'lib/textcomplete';
 
 @import "node_modules/material-ui/src/less/scaffolding.less";
+@input-width: 520px;
 @import "node_modules/material-ui/src/less/components.less";
 
 #github-issue-template-maker {
@@ -15,5 +16,15 @@
   input, textarea {
     border-radius: 3px;
   }
+}
 
+.gh-template-editor {
+  input, textarea {
+    width: 100%;
+  }
+  textarea {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 3px;
+  }
 }
