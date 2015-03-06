@@ -38,7 +38,7 @@ var style = {
   }
 };
 
-var Textarea = React.createClass({
+var GHTemplateMaker = React.createClass({
   mixins: [PureRenderMixin, LinkedStateMixin],
   getInitialState() {
     return {
@@ -134,4 +134,4 @@ var Preview = React.createClass({
   }
 });
 
-module.exports = Textarea;
+module.exports = GHTemplateMaker;
