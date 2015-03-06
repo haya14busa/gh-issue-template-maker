@@ -20,8 +20,6 @@ emojify.setConfig({
   ignore_emoticons: true
 });
 
-var mui = require('material-ui');
-
 var LinkedStateMixin = React.addons.LinkedStateMixin
 var PureRenderMixin = React.addons.PureRenderMixin;
 
@@ -64,14 +62,14 @@ var GHTemplateMaker = React.createClass({
     var GHEditor = (
       <div className='gh-template-editor'>
         <div>
-          <mui.TextField
+          <input type='text'
             valueLink={this.linkState('repo')}
-            hintText='Repository url' />
+            placeholder='Repository url' />
         </div>
         <div>
-          <mui.TextField
+          <input type='text'
             valueLink={this.linkState('title')}
-            hintText='Title' />
+            placeholder='Title' />
         </div>
         <textarea
           ref='body'
