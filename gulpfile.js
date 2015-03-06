@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var watch = require('gulp-watch');
-var sass = require('gulp-sass');
+var less = require('gulp-less');
 var autoprefixer = require('gulp-autoprefixer');
 var uglify = require('gulp-uglify');
 var plumber = require('gulp-plumber');
@@ -18,7 +18,7 @@ var mainBowerFiles = require('main-bower-files');
 var source = {}; // files to watch
 source.root = './app';
 source.js = source.root + '/js/**/*.js{,x}';
-source.sass = source.root + '/sass/**/*scss';
+source.less = source.root + '/less/**/*less';
 source.html = source.root + '/**/*.html';
 
 var target = {}; // compiled files
@@ -69,11 +69,11 @@ gulp.task('clean', function(cb) {
   return del([target.root + '/*'], cb);
 });
 
-gulp.task('build', ['bower', 'sass', 'js', 'html']);
+gulp.task('build', ['bower', 'css', 'js', 'html']);
 
 gulp.task('watch', function() {
   gulp.watch(source.js, ['js', browserSync.reload]);
-  gulp.watch(source.sass, ['sass', browserSync.reload]);
+  gulp.watch(source.less, ['less', browserSync.reload]);
   gulp.watch(source.html, ['html', browserSync.reload]);
 });
 
@@ -110,11 +110,11 @@ gulp.task('bower', function() {
     .pipe(gulp.dest(target.lib.assets));
 });
 
-gulp.task('sass', function() {
+gulp.task('css', function() {
   return gulp
-    .src(source.sass)
+    .src(source.less)
     .pipe(plumber())
-    .pipe(sass())
+    .pipe(less())
     .pipe(autoprefixer())
     .pipe(gulp.dest(target.css));
 });
