@@ -110,7 +110,7 @@ var GenerateURL = React.createClass({
     return (
       <div>
         <h2>URL</h2>
-        <pre>{this.url()}</pre>
+        <a href={this.url()}>{this.url()}</a>
       </div>
     );
   }
