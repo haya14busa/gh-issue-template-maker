@@ -50,7 +50,8 @@ var routes = (
 module.exports = function() {
   Router.run(routes, function (Handler, state) {
     var params = state.params;
-    React.render(<Handler params={params}/>, document.getElementById('react-app'));
+    // React.render(<Handler params={params}/>, document.getElementById('react-app'));
+    React.render(<GHITemplate />, document.getElementById('react-app'));
   });
 };
 

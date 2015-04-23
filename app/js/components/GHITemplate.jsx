@@ -61,6 +61,7 @@ var GHTemplateMaker = React.createClass({
   render() {
     var GHEditor = (
       <div className='gh-template-editor'>
+        <h2>Edit!</h2>
         <div>
           <input type='text'
             valueLink={this.linkState('repo')}
@@ -73,7 +74,7 @@ var GHTemplateMaker = React.createClass({
         </div>
         <textarea
           ref='body'
-          rows='10'
+          rows='15'
           valueLink={this.linkState('body')}
           onKeyUp={this.handleChange}
           placeholder='Leave a comments'
@@ -83,8 +84,8 @@ var GHTemplateMaker = React.createClass({
     return (
       <div className='gh-template-maker--app'>
         {GHEditor}
-        <GenerateURL title={this.state.title} body={this.state.body} repo={this.state.repo} />
         <Preview title={this.state.title} body={this.state.body} />
+        <GenerateURL title={this.state.title} body={this.state.body} repo={this.state.repo} />
       </div>
     );
   }
@@ -108,7 +109,7 @@ var GenerateURL = React.createClass({
   // --
   render() {
     return (
-      <div>
+      <div className='gh-template-url'>
         <h2>URL</h2>
         <a href={this.url()}>{this.url()}</a>
       </div>
@@ -126,7 +127,7 @@ var Preview = React.createClass({
   },
   render() {
     return (
-      <div>
+      <div className='gh-template-preview'>
         <h2>Preview</h2>
         <h3>{this.props.title}</h3>
         <div

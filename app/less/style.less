@@ -1,8 +1,17 @@
 @import 'lib/emojify';
 @import 'lib/textcomplete';
 
+@header-height: 30px;
+@url-height: 120px;
+@main-area-height: calc(~"100vh -" @header-height + @url-height);
+
 * {
   box-sizing: border-box;
+}
+
+#header-title {
+  height: @header-height;
+  margin: 0;
 }
 
 #github-issue-template-maker {
@@ -13,6 +22,22 @@
 }
 
 .gh-template-maker--app {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.gh-template-editor,
+.gh-template-preview {
+  width: 50%;
+  min-width: 400px;
+  height: @main-area-height;
+  padding: 10px;
+}
+
+.gh-template-url {
+  width: 100%;
+  height: @url-height;
 }
 
 .gh-template-editor {
