@@ -1,0 +1,83 @@
+.emoji {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.dropdown-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ddd;
+  background-color: white;
+}
+.dropdown-menu li {
+  border-top: 1px solid #ddd;
+  padding: 2px 5px;
+}
+.dropdown-menu li:first-child {
+  border-top: none;
+}
+.dropdown-menu li:hover,
+.dropdown-menu .active {
+  background-color: #6eb7db;
+}
+.dropdown-menu a:hover {
+  cursor: pointer;
+}
+.dropdown-menu img {
+  height: 18px;
+  width: 18px;
+  margin-right: 5px;
+}
+* {
+  box-sizing: border-box;
+}
+#header-title {
+  height: 30px;
+  margin: 0;
+}
+#github-issue-template-maker {
+  height: 100vh;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.gh-template-maker--app {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.gh-template-editor,
+.gh-template-preview {
+  width: 50%;
+  min-width: 400px;
+  height: calc(100vh - 150px);
+  padding: 10px;
+}
+.gh-template-url {
+  width: 100%;
+  height: 120px;
+}
+.gh-template-editor input,
+.gh-template-editor textarea {
+  width: 100%;
+  border-radius: 3px;
+  padding: 10px;
+  margin: 5px;
+}
+.gh-template-editor input {
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+.gh-template-editor textarea {
+  border: 1px solid #ccc;
+}
